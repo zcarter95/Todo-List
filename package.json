@@ -1,0 +1,31 @@
+{
+  "name": "webpacktemplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "init": "npm install --save-dev webpack webpack-cli html-webpack-plugin style-loader css-loader html-loader webpack-dev-server",
+    "build": "webpack",
+    "dev": "webpack serve",
+    "deploy": "git branch gh-pages && git checkout gh-pages && git merge main --no-edit && webpack && git add -f && git commit -m 'Deployment commit' && git subtree push --prefix dist origin gh-pages && git checkout main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zcarter95/WebpackTemplate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zcarter95/WebpackTemplate/issues"
+  },
+  "homepage": "https://github.com/zcarter95/WebpackTemplate#readme",
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.6.3",
+    "style-loader": "^4.0.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  }
+}
