@@ -1,24 +1,32 @@
-class ToDoItem {
-    constructor (title, description, dueDate, priority, notes) {
+import { format } from "date-fns";
+
+export class ToDoItem {
+    constructor (title, description, dueDate, priority) {
         this.id = crypto.randomUUID();
         this.title = title;
         this.description = description;
-        this.dueDate = new Date()
+        this.dueDate = dueDate;
         this.priority = priority;
-        this.notes = notes;
         this.parentProject = null;
     }
 }
 
-class ToDoProject {
+export class ToDoProject {
     constructor (title) {
         this.id = crypto.randomUUID();
         this.title = title;
-        this.items = [];
+        this.items = [ new ToDoItem("Example", "An example To-Do item", "8/22/2025", "2") ];
     }
 
     addItem(item) {
         this.items.push(item);
         item.parentProject = this;
+    }
+}
+
+export class ToDoList {
+    constructor () {
+        this.id = crypto.randomUUID();
+        this.projects = [new ToDoProject("Default Project")];
     }
 }

@@ -1,9 +1,22 @@
 import "./styles.css"
+import { addToDo, getToDos, ToDoList } from "./todo"
 
-import { addToDo, getToDos } from "./todo"
+const toDoList = new ToDoList();
+const openButton = document.querySelector("[data-open-modal]");
+const closeButton = document.querySelector("[data-close-modal]");
+const modal = document.querySelector("[data-modal]");
+const submit = document.getElementById("new-task");
 
-addToDo("Make a To-Do list app", "Write a web app that creates a To-List and supports multiple projects", "soon", "high", "these are some notes", "item 1, item2")
+openButton.addEventListener("click", () => {
+    modal.showModal();
+})
 
-function testFunction () {
-    console.log("test");
-}
+closeButton.addEventListener("click", () => {
+    modal.close();
+})
+
+submit.addEventListener("submit", (event) => {
+    event.preventDefault();
+    let formData = new FormData(submit);
+    console.log(formData);
+})
