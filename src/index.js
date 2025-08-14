@@ -1,22 +1,23 @@
 import "./styles.css"
-import { addToDo, getToDos, ToDoList } from "./todo"
+import ToDoItem from "./modules/Item";
+import ToDoProject from "./modules/Project";
+import ToDoList from "./modules/List";
+import UI from "./modules/UI";
 
 const toDoList = new ToDoList();
-const openButton = document.querySelector("[data-open-modal]");
-const closeButton = document.querySelector("[data-close-modal]");
-const modal = document.querySelector("[data-modal]");
-const submit = document.getElementById("new-task");
+const defaultProject = new ToDoProject("Default");
+toDoList.addProject(defaultProject);
 
-openButton.addEventListener("click", () => {
-    modal.showModal();
-})
+document.addEventListener('DOMContentLoaded', ready);
+function ready() {
+    UI.loadHomePage();
+    UI.displayTasks(toDoList);
+    UI.displayProjects(toDoList);
+    UI.getNewTaskData();
+}
 
-closeButton.addEventListener("click", () => {
-    modal.close();
-})
-
-submit.addEventListener("submit", (event) => {
-    event.preventDefault();
-    let formData = new FormData(submit);
-    console.log(formData);
-})
+export function addToDoItemToList(item) {
+    let task = new ToDoItem(item.title, item.description, item.dueDate, item.priority);
+    defaultProject.addItem(task);
+    UI.displayProjects();
+}
