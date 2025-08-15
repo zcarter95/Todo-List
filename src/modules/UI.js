@@ -1,5 +1,5 @@
 import { addToDoItemToList } from "..";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 export default class UI {
     static getNewTaskData() {
         const submit = document.getElementById("new-task");
@@ -37,29 +37,35 @@ export default class UI {
             let projectTitle = document.createElement("h1");
             projectTitle.textContent = project.title;
             projectContainer.appendChild(projectTitle);
-
-            for (const item of project.items) {
-                let taskContainer = document.createElement("div");
-                taskContainer.id = item.id;
-                let taskTitle = document.createElement("h2");
-                taskTitle.textContent = item.title;
-                taskContainer.appendChild(taskTitle);
-                let ul = document.createElement("ul");
-                let taskDescription = document.createElement("li");
-                taskDescription.textContent = item.description;
-                ul.appendChild(taskDescription);
-                let taskDueDate = document.createElement("li");
-                taskDueDate.textContent = format(item.dueDate, 'dd/MM/yyyy');
-                ul.appendChild(taskDueDate);
-                let taskPriority = document.createElement("li");
-                taskPriority.textContent = item.priority;
-                ul.appendChild(taskPriority);
-                taskContainer.appendChild(ul);
-                projectContainer.appendChild(taskContainer);
-            }
             projectsDom.appendChild(projectContainer);
         }
     }
-    static displayTasks(toDoList) {
+    static displayTasks(task) {
+        let projectContainer = document.getElementById(task.parentProject.id);
+
+        let taskContainer = document.createElement("div");
+        taskContainer.id = task.id;
+
+        let taskTitle = document.createElement("h2");
+        taskTitle.textContent = task.title;
+        taskContainer.appendChild(taskTitle);
+
+        let ul = document.createElement("ul");
+
+        let taskDescription = document.createElement("li");
+        taskDescription.textContent = task.description;
+        ul.appendChild(taskDescription);
+
+        let taskDueDate = document.createElement("li");
+        let dateIso = parseISO(task.dueDate);
+        taskDueDate.textContent = format(new Date(dateIso), 'MM/dd/yyyy');
+        ul.appendChild(taskDueDate);
+
+        let taskPriority = document.createElement("li");
+        taskPriority.textContent = task.priority;
+        ul.appendChild(taskPriority);
+
+        taskContainer.appendChild(ul);
+        projectContainer.appendChild(taskContainer);
     }
 }

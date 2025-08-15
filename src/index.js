@@ -11,7 +11,6 @@ toDoList.addProject(defaultProject);
 document.addEventListener('DOMContentLoaded', ready);
 function ready() {
     UI.loadHomePage();
-    UI.displayTasks(toDoList);
     UI.displayProjects(toDoList);
     UI.getNewTaskData();
 }
@@ -19,5 +18,5 @@ function ready() {
 export function addToDoItemToList(item) {
     let task = new ToDoItem(item.title, item.description, item.dueDate, item.priority);
     defaultProject.addItem(task);
-    UI.displayProjects(toDoList);
+    UI.displayTasks(task);
 }
