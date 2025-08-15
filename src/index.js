@@ -19,5 +19,5 @@ function ready() {
 export function addToDoItemToList(item) {
     let task = new ToDoItem(item.title, item.description, item.dueDate, item.priority);
     defaultProject.addItem(task);
-    UI.displayProjects();
+    UI.displayProjects(toDoList);
 }

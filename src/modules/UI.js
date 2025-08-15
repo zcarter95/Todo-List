@@ -31,7 +31,6 @@ export default class UI {
     }
     static displayProjects(toDoList) {
         const projectsDom = document.getElementById("projects");
-        console.log(Object.getPrototypeOf(toDoList.projects));
         for (const project of toDoList.projects) {
             let projectContainer = document.createElement("div");
             projectContainer.id = project.id;
@@ -39,7 +38,7 @@ export default class UI {
             projectTitle.textContent = project.title;
             projectContainer.appendChild(projectTitle);
 
-            for (const item of projects.items) {
+            for (const item of project.items) {
                 let taskContainer = document.createElement("div");
                 taskContainer.id = item.id;
                 let taskTitle = document.createElement("h2");
@@ -62,6 +61,5 @@ export default class UI {
         }
     }
     static displayTasks(toDoList) {
-        //console.log(toDoList.projects[0].title);
     }
 }
