@@ -55,7 +55,8 @@ export default class UI {
         const projectsDom = document.getElementById("projects");
         let projectContainer = document.createElement("div");
         projectContainer.id = project.id;
-        let projectTitle = document.createElement("h1");
+        projectContainer.classList.add("project");
+        let projectTitle = document.createElement("h2");
         projectTitle.textContent = project.title;
         projectContainer.appendChild(projectTitle);
         projectsDom.appendChild(projectContainer);

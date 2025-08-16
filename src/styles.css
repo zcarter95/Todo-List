@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
+    font-family: "Roboto Flex", sans-serif;
 }
 
 .main {
@@ -72,4 +75,45 @@ textarea:focus {
 
 #submit-task {
     justify-self: end;
+}
+
+.heading {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-bottom: #274534 solid 2px;
+}
+
+#new-project-button {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: 400;
+    background-color: #274534;
+    color: white;
+    margin-right: 1rem;
+}
+
+.sidebar {
+    background-color: #D0D6D3;
+}
+
+.sidebar h1 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.sidebar h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.project {
+    display: grid;
+    background-color: #86A793;
+    justify-content: center;
+    margin: .5rem;
+    border-radius: .25rem;
 }
