@@ -6,40 +6,67 @@
     <title>Document</title>
   </head>
   <body>
-    <div id="projects">
-
-    </div>
-    <div class="tasks">
-      <button data-open-modal>New Task</button>
-    </div>
-    <dialog data-modal>
-      <button data-close-modal>X</button>
-      <div class="wrapper">
-        <h1>New Task</h1>
-        <form id="new-task">
+    <div class="modals">
+      <dialog data-modal id="new-project-modal">
+        <button data-close-modal id="close-new-project-button">X</button>
+        <div class="wrapper">
+        <h1>New Project</h1>
+        <form id="new-project">
           <div class="field">
             <textarea name="title" id="title" placeholder="Title: "></textarea>
           </div>
           <div class="field">
-            <textarea name="description" id="description" placeholder="Description: "></textarea>
+            <button type="submit" id="create-project">Create</button>
           </div>
-          <div class="field">
-            <label for="due-date">Due Date: </label>
-            <input type="date" name="dueDate" id="due-date" />
-          </div>
-          <div class="field">
-            <label for="priority">Priority: </label>
-            <select name="priority" id="priority">
-              <option value="1">Low</option>
-              <option value="2">Medium</option>
-              <option value="3">High</option>
-            </select>
-          </div>
-          <div class="field">
-            <button type="submit" id="submit-task">Create</button>
-          </div>
-       </form>
+        </form>
       </div>
     </dialog>
+          <dialog data-modal id="new-task-modal">
+            <button data-close-modal id="close-new-task-button">X</button>
+            <div class="wrapper">
+              <h1>New Task</h1>
+              <form id="new-task">
+                <div class="field">
+                  <textarea name="title" id="title" placeholder="Title: "></textarea>
+                </div>
+                <div class="field">
+                  <textarea name="description" id="description" placeholder="Description: "></textarea>
+                </div>
+                <div class="field">
+                  <label for="due-date">Due Date: </label>
+                  <input type="date" name="dueDate" id="due-date" />
+                </div>
+                <div class="field">
+                  <label for="priority">Priority: </label>
+                  <select name="priority" id="priority">
+                    <option value="1">Low</option>
+                    <option value="2">Medium</option>
+                    <option value="3">High</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <button type="submit" id="submit-task">Create</button>
+                </div>
+             </form>
+            </div>
+          </dialog>
+    </div>
+    <div class="main">
+      <div class="header">
+
+      </div>
+      <div class="content">
+        <div class="sidebar">
+          <div id="projects">
+            <button data-open-modal id="new-project-button">New Project</button>
+          </div>
+        </div>
+        <div class="tasks-view">
+          <div class="tasks">
+            <button data-open-modal id="new-task-button">New Task</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

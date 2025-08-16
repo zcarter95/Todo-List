@@ -1,6 +1,17 @@
-import { addToDoItemToList } from "..";
+import { addToDoItemToProject, addToDoProjectToList } from "..";
 import { format, parseISO } from "date-fns";
 export default class UI {
+    static getNewProjectData() {
+        const submit = document.getElementById("new-project");
+        submit.addEventListener("submit", (event) => {
+            event.preventDefault();
+            let formData = new FormData(submit);
+            let project = {
+                title: Object.fromEntries(formData).title
+            }
+            addToDoProjectToList(project);
+        })
+    }
     static getNewTaskData() {
         const submit = document.getElementById("new-task");
         submit.addEventListener("submit", (event) => {
@@ -12,33 +23,43 @@ export default class UI {
                 dueDate: Object.fromEntries(formData).dueDate,
                 priority: Object.fromEntries(formData).priority
             }
-            addToDoItemToList(item);
+            addToDoItemToProject(item);
         });
     }
-    static loadHomePage() {
-        const openButton = document.querySelector("[data-open-modal]");
-        const closeButton = document.querySelector("[data-close-modal]");
-        const modal = document.querySelector("[data-modal]");
-        
+    static createProjectModal() {
+        const openButton = document.getElementById("new-project-button");
+        const closeButton = document.getElementById("close-new-project-button");
+        const modal = document.getElementById("new-project-modal");
 
         openButton.addEventListener("click", () => {
-        modal.showModal();
+            modal.showModal();
+        });
+        closeButton.addEventListener("click", () => {
+            modal.close();
+        })
+    }
+    static createTaskModal() {
+        const openButton = document.getElementById("new-task-button");
+        const closeButton = document.getElementById("close-new-task-button");
+        const modal = document.getElementById("new-task-modal");
+
+        openButton.addEventListener("click", () => {
+            modal.showModal();
         });
 
         closeButton.addEventListener("click", () => {
-        modal.close();
+            modal.close();
         });
     }
-    static displayProjects(toDoList) {
+    static displayProjects(project) {
         const projectsDom = document.getElementById("projects");
-        for (const project of toDoList.projects) {
-            let projectContainer = document.createElement("div");
-            projectContainer.id = project.id;
-            let projectTitle = document.createElement("h1");
-            projectTitle.textContent = project.title;
-            projectContainer.appendChild(projectTitle);
-            projectsDom.appendChild(projectContainer);
-        }
+        let projectContainer = document.createElement("div");
+        projectContainer.id = project.id;
+        let projectTitle = document.createElement("h1");
+        projectTitle.textContent = project.title;
+        projectContainer.appendChild(projectTitle);
+        projectsDom.appendChild(projectContainer);
+        
     }
     static displayTasks(task) {
         let projectContainer = document.getElementById(task.parentProject.id);
