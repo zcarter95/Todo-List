@@ -1,6 +1,13 @@
 import { addToDoItemToProject, addToDoProjectToList } from "..";
 import { format, parseISO } from "date-fns";
 export default class UI {
+    static displayCurrentProject(project) {
+        const tasks_view = document.getElementById("current_project");
+        const heading = document.getElementById("current-project-heading");
+        heading.textContent = project.title;
+        //tasks_view.appendChild(heading);
+    }
+
     static getNewProjectData() {
         const submit = document.getElementById("new-project");
         submit.addEventListener("submit", (event) => {

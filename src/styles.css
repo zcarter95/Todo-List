@@ -19,7 +19,8 @@ body, html {
 
 .content {
     display: grid;
-    grid-template-columns: 15rem 100%;
+    grid-template-columns: 1fr 6fr;
+    width: 100%;
 }
 
 dialog {
@@ -82,18 +83,23 @@ textarea:focus {
     grid-auto-flow: column;
     align-items: center;
     justify-content: space-evenly;
-    border-bottom: #274534 solid 2px;
+    border-bottom: #274534 solid 1px;
+    width: 90%;
+    justify-self: center;
 }
 
-#new-project-button {
-    height: 2rem;
-    width: 2rem;
+#new-project-button, #new-task-button {
+    height: 1.5rem;
+    width: 1.5rem;
     border-radius: 50%;
     font-size: 1.5rem;
     font-weight: 400;
     background-color: #274534;
     color: white;
     margin-right: 1rem;
+    display: grid;
+    align-content: center;
+    justify-content: center;
 }
 
 .sidebar {
@@ -105,7 +111,7 @@ textarea:focus {
     font-weight: 600;
 }
 
-.sidebar h2 {
+h2 {
     font-size: 1.5rem;
     font-weight: 400;
 }
@@ -116,4 +122,32 @@ textarea:focus {
     justify-content: center;
     margin: .5rem;
     border-radius: .25rem;
+}
+
+#current-project {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr;
+    width: 100%;
+    grid-template-rows: .5fr 4fr;
+}
+
+#current-project h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 600;
+    align-self: flex-start;
+}
+
+.tasks {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+}
+
+.tasks .heading {
+    width: 75%;
+    display: grid;
+    justify-content: space-between;
 }

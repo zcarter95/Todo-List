@@ -7,6 +7,7 @@ import UI from "./modules/UI";
 const toDoList = new ToDoList();
 const defaultProject = new ToDoProject("Default");
 toDoList.addProject(defaultProject);
+let currentProject = defaultProject;
 
 document.addEventListener('DOMContentLoaded', ready);
 function ready() {
@@ -15,6 +16,7 @@ function ready() {
     UI.displayProjects(defaultProject);
     UI.getNewProjectData();
     UI.getNewTaskData();
+    UI.displayCurrentProject(currentProject);
 }
 
 export function addToDoItemToProject(item) {
