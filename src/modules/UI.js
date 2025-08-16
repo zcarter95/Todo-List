@@ -5,7 +5,6 @@ export default class UI {
         const tasks_view = document.getElementById("current_project");
         const heading = document.getElementById("current-project-heading");
         heading.textContent = project.title;
-        //tasks_view.appendChild(heading);
     }
 
     static getNewProjectData() {
@@ -69,32 +68,16 @@ export default class UI {
         projectsDom.appendChild(projectContainer);
         
     }
-    static displayTasks(task) {
-        let projectContainer = document.getElementById(task.parentProject.id);
-
-        let taskContainer = document.createElement("div");
-        taskContainer.id = task.id;
-
-        let taskTitle = document.createElement("h2");
-        taskTitle.textContent = task.title;
-        taskContainer.appendChild(taskTitle);
-
-        let ul = document.createElement("ul");
-
-        let taskDescription = document.createElement("li");
-        taskDescription.textContent = task.description;
-        ul.appendChild(taskDescription);
-
-        let taskDueDate = document.createElement("li");
-        let dateIso = parseISO(task.dueDate);
-        taskDueDate.textContent = format(new Date(dateIso), 'MM/dd/yyyy');
-        ul.appendChild(taskDueDate);
-
-        let taskPriority = document.createElement("li");
-        taskPriority.textContent = task.priority;
-        ul.appendChild(taskPriority);
-
-        taskContainer.appendChild(ul);
-        projectContainer.appendChild(taskContainer);
+    static displayTasks(project) {
+        const tasksContainer = document.getElementById("tasks");
+        for (const task of Array.from(project.items)) {
+            console.log(task);
+            let taskItem = document.createElement("div");
+            taskItem.classList.add("task");
+            let h3 = document.createElement("h3");
+            h3.textContent = task.title;
+            taskItem.appendChild(h3);
+            tasksContainer.appendChild(taskItem);
+        }  
     }
 }

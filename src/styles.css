@@ -139,15 +139,16 @@ h2 {
     align-self: flex-start;
 }
 
-.tasks {
-    display: flex;
+#tasks {
+    display: grid;
     justify-content: center;
     align-items: start;
-    width: 100%;
+    grid-template-columns: 1fr;
+    width: 75rem;
 }
 
-.tasks .heading {
-    width: 75%;
+#tasks .heading {
+    width: 75rem;
     display: grid;
     justify-content: space-between;
 }
