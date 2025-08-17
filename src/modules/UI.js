@@ -69,13 +69,22 @@ export default class UI {
         
     }
     static displayTasks(project) {
-        const tasksContainer = document.getElementById("tasks");
+        const tasksContainer = document.getElementById("tasks-container");
+        tasksContainer.innerHTML = '';
         for (const task of Array.from(project.items)) {
             console.log(task);
             let taskItem = document.createElement("div");
             taskItem.classList.add("task");
             let h3 = document.createElement("h3");
             h3.textContent = task.title;
+            switch (task.priority) {
+                case 1:
+                    taskItem.style.backgroundColor = "lightgreen";
+                case 2:
+                    taskItem.style.backgroundClip = "lightyellow";
+                case 3:
+                    taskItem.style.backgroundColor = "lightred";
+            };
             taskItem.appendChild(h3);
             tasksContainer.appendChild(taskItem);
         }  
