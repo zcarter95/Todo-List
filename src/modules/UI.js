@@ -75,17 +75,29 @@ export default class UI {
             console.log(task);
             let taskItem = document.createElement("div");
             taskItem.classList.add("task");
+            let titleArea = document.createElement("div");
             let h3 = document.createElement("h3");
             h3.textContent = task.title;
+            titleArea.appendChild(h3);
+            let infoArea = document.createElement("div");
+            let date = document.createElement("p");
+            let dateIso = parseISO(task.dueDate);
+            let dateFormatted = format(dateIso, "EEEE, MMMM do, yyyy")
+            date.textContent = dateFormatted;
+            infoArea.appendChild(date);
             switch (task.priority) {
-                case 1:
-                    taskItem.style.backgroundColor = "lightgreen";
-                case 2:
-                    taskItem.style.backgroundClip = "lightyellow";
-                case 3:
-                    taskItem.style.backgroundColor = "lightred";
+                case "1":
+                    taskItem.style.backgroundColor = "#90EE90";
+                    break;
+                case "2":
+                    taskItem.style.backgroundColor = "#FFFFC5";
+                    break;
+                case "3":
+                    taskItem.style.backgroundColor = "#FFCCCB";
+                    break;
             };
-            taskItem.appendChild(h3);
+            taskItem.appendChild(titleArea);
+            taskItem.appendChild(infoArea);
             tasksContainer.appendChild(taskItem);
         }  
     }

@@ -14,7 +14,7 @@ body, html {
 }
 
 .header {
-    background: linear-gradient(to right, #274534, #B6DAC5);
+    background: linear-gradient(to right, #B3D9A9, #EAF2CE);
 }
 
 .content {
@@ -103,7 +103,7 @@ textarea:focus {
 }
 
 .sidebar {
-    background-color: #D0D6D3;
+    background-color: #F2F2F2;
 }
 
 .sidebar h1 {
@@ -118,10 +118,11 @@ h2 {
 
 .project {
     display: grid;
-    background-color: #86A793;
+    background-color: white;
     justify-content: center;
     margin: .5rem;
-    border-radius: .25rem;
+    border-radius: .5rem;
+    border: solid #8C8C8B 3px;
 }
 
 #current-project {
@@ -145,10 +146,27 @@ h2 {
     align-items: start;
     grid-template-columns: 1fr;
     width: 75rem;
+    justify-self: center;
+    grid-template-rows: .5fr 4fr;
 }
 
 #tasks .heading {
     width: 75rem;
     display: grid;
     justify-content: space-between;
+}
+
+.task {
+    padding: 5px;
+    margin-inline: 1rem;
+    border-radius: .5rem;
+    border: solid #8C8C8B 3px;
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 3rem;
+}
+
+#tasks-container {
+    display: grid;
+    row-gap: 1rem;
 }
