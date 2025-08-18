@@ -1,10 +1,19 @@
-import { addToDoItemToProject, addToDoProjectToList } from "..";
+import { addToDoItemToProject, addToDoProjectToList,  setCurrentProject} from "..";
 import { format, parseISO } from "date-fns";
 export default class UI {
     static displayCurrentProject(project) {
-        const tasks_view = document.getElementById("current_project");
         const heading = document.getElementById("current-project-heading");
         heading.textContent = project.title;
+        console.log(project.title);
+    }
+
+    static getCurrentProject() {
+        const projects = document.getElementsByClassName("project");
+        Array.from(projects).forEach(project => {
+            project.addEventListener("click", () => {
+                setCurrentProject(project);
+            })
+        });
     }
 
     static getNewProjectData() {
@@ -78,7 +87,6 @@ export default class UI {
         projectTitle.textContent = project.title;
         projectContainer.appendChild(projectTitle);
         projectsDom.appendChild(projectContainer);
-        
     }
     static displayTasks(project) {
         const tasksContainer = document.getElementById("tasks-container");

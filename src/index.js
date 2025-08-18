@@ -17,11 +17,12 @@ function ready() {
     UI.getNewProjectData();
     UI.getNewTaskData();
     UI.displayCurrentProject(currentProject);
+    UI.getCurrentProject();
 }
 
 export function addToDoItemToProject(item) {
     let task = new ToDoItem(item.title, item.description, item.dueDate, item.priority);
-    defaultProject.addItem(task);
+    currentProject.addItem(task);
     UI.displayTasks(currentProject);
 }
 
@@ -29,4 +30,13 @@ export function addToDoProjectToList(item) {
     let project = new ToDoProject(item.title);
     toDoList.addProject(project);
     UI.displayProjects(project);
+    UI.getCurrentProject();
+}
+
+export function setCurrentProject(project) {
+    const projectId = project.id;
+    const selectedProject = toDoList.projects.find(p => p.id === projectId);
+    currentProject = selectedProject;
+    UI.displayCurrentProject(currentProject);
+    UI.displayTasks(currentProject);
 }
