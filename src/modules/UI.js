@@ -35,27 +35,39 @@ export default class UI {
     static createProjectModal() {
         const openButton = document.getElementById("new-project-button");
         const closeButton = document.getElementById("close-new-project-button");
+        const createButton = document.getElementById("create-project");
+        const createProjectForm = document.getElementById("new-project");
         const modal = document.getElementById("new-project-modal");
 
         openButton.addEventListener("click", () => {
             modal.showModal();
+            createProjectForm.reset();
         });
         closeButton.addEventListener("click", () => {
+            modal.close();
+        })
+        createButton.addEventListener("click", () => {
             modal.close();
         })
     }
     static createTaskModal() {
         const openButton = document.getElementById("new-task-button");
         const closeButton = document.getElementById("close-new-task-button");
+        const createButton = document.getElementById("submit-task");
+        const createTaskForm = document.getElementById("new-task");
         const modal = document.getElementById("new-task-modal");
 
         openButton.addEventListener("click", () => {
             modal.showModal();
+            createTaskForm.reset();
         });
 
         closeButton.addEventListener("click", () => {
             modal.close();
         });
+        createButton.addEventListener("click", () => {
+            modal.close();
+        })
     }
     static displayProjects(project) {
         const projectsDom = document.getElementById("projects");
