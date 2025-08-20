@@ -1,5 +1,5 @@
 import { ta } from "date-fns/locale";
-import { addToDoItemToProject, addToDoProjectToList,  setCurrentProject, currentUpdateTask, updateTask} from "..";
+import { addToDoItemToProject, addToDoProjectToList,  setCurrentProject, currentUpdateTask, updateTask, removeTaskFromProject} from "..";
 import { format, parseISO } from "date-fns";
 import editImage from "../images/edit_icon.svg"
 export default class UI {
@@ -138,11 +138,32 @@ export default class UI {
             let taskItem = document.createElement("div");
             taskItem.classList.add("task");
             taskItem.id = task.id;
+
             let titleArea = document.createElement("div");
             titleArea.classList.add("title-area");
+
+            // Create a container for h3 and checkbox
+            let titleCheckboxContainer = document.createElement("div");
+            titleCheckboxContainer.classList.add("title-checkbox-container");
+
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.classList.add("task-checkbox");
+            checkbox.addEventListener("change", (event) => {
+                let taskId = event.target.parentNode.parentNode.parentNode.id;
+                if (checkbox.checked) {
+                    removeTaskFromProject(taskId)
+                }
+            })
+
             let h3 = document.createElement("h3");
             h3.textContent = task.title;
-            titleArea.appendChild(h3);
+
+            titleCheckboxContainer.appendChild(checkbox);
+            titleCheckboxContainer.appendChild(h3);
+
+            titleArea.appendChild(titleCheckboxContainer);
+
             let infoArea = document.createElement('div');
             infoArea.classList.add("info-area");
             let date = document.createElement("p");

@@ -57,3 +57,11 @@ export function setCurrentProject(project) {
 export function currentUpdateTask(taskId) {
     currentTaskId = taskId
 }
+
+export function removeTaskFromProject(taskId) {
+    currentProject.removeItem(taskId);
+    UI.displayTasks(currentProject);
+    if (currentProject.items.length === 0) {
+        UI.displayCurrentProject(currentProject);
+    }
+}
