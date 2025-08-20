@@ -110,19 +110,24 @@ export default class UI {
             let dateFormatted = format(dateIso, "EEEE, MMMM do, yyyy")
             date.textContent = dateFormatted;
             infoArea.appendChild(date);
-            let editIcon = document.createElement("img");
-            editIcon.src = editImage;
-            editIcon.addEventListener("click", () => {
-                console.log("clicky");
-            })
-            infoArea.appendChild(editIcon);
-            titleArea.appendChild(infoArea);
+            
             const descriptionArea = document.createElement("div");
             descriptionArea.classList.add("description-area");
             const description = document.createElement("p");
             description.textContent = task.description;
             descriptionArea.appendChild(description);
             descriptionArea.style.display = "none";
+            let editButton = document.createElement("button");
+            editButton.style.border = "none";
+            editButton.style.background = "none";
+            let editIcon = document.createElement("img");
+            editIcon.src = editImage;
+            editButton.appendChild(editIcon);
+            editButton.addEventListener("click", () => {
+                updateTaskModal();
+            })
+            infoArea.appendChild(editButton);
+            titleArea.appendChild(infoArea);
             switch (task.priority) {
                 case "1":
                     taskItem.style.backgroundColor = "#90EE90";
@@ -137,16 +142,35 @@ export default class UI {
             taskItem.appendChild(titleArea);
             taskItem.appendChild(descriptionArea);
             tasksContainer.appendChild(taskItem);
-            taskItem.addEventListener("click", () => {
-                switch (descriptionArea.style.display) {
-                    case ("none"):
-                        descriptionArea.style.display = "block";
-                        break;
-                    case ("block"):
-                        descriptionArea.style.display = "none";
-                        break;
+            taskItem.addEventListener("click", (event) => {
+                if (event.target.nodeName === "DIV") {
+                    switch (descriptionArea.style.display) {
+                        case ("none"):
+                            descriptionArea.style.display = "block";
+                            break;
+                        case ("block"):
+                            descriptionArea.style.display = "none";
+                            break;
+                    }
                 }
             })
         }  
     }
+}
+
+function updateTaskModal() {
+    const closeButton = document.getElementById("close-update-task-button");
+    const createButton = document.getElementById("update-task-button");
+    const createTaskForm = document.getElementById("update-task");
+    const modal = document.getElementById("update-task-modal");
+
+    modal.showModal();
+    createTaskForm.reset();
+
+    closeButton.addEventListener("click", () => {
+        modal.close();
+    });
+    createButton.addEventListener("click", () => {
+        modal.close();
+    })
 }
