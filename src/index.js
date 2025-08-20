@@ -8,6 +8,7 @@ const toDoList = new ToDoList();
 const defaultProject = new ToDoProject("Default");
 toDoList.addProject(defaultProject);
 let currentProject = defaultProject;
+UI.currentProject = defaultProject;
 let currentTaskId = ""
 
 document.addEventListener('DOMContentLoaded', ready);
@@ -48,6 +49,7 @@ export function setCurrentProject(project) {
     const projectId = project.id;
     const selectedProject = toDoList.projects.find(p => p.id === projectId);
     currentProject = selectedProject;
+    UI.currentProject = currentProject;
     UI.displayCurrentProject(currentProject);
     UI.displayTasks(currentProject);
 }

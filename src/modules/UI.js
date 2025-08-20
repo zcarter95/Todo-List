@@ -3,6 +3,7 @@ import { addToDoItemToProject, addToDoProjectToList,  setCurrentProject, current
 import { format, parseISO } from "date-fns";
 import editImage from "../images/edit_icon.svg"
 export default class UI {
+    static currentProject = null;
     static displayCurrentProject(project) {
         const heading = document.getElementById("current-project-heading");
         heading.textContent = project.title;
@@ -72,11 +73,15 @@ export default class UI {
         const closeButton = document.getElementById("close-new-task-button");
         const createButton = document.getElementById("submit-task");
         const createTaskForm = document.getElementById("new-task");
+        const dueDateField = document.getElementById("create-task-due-date")
         const modal = document.getElementById("new-task-modal");
+
+        
 
         openButton.addEventListener("click", () => {
             modal.showModal();
             createTaskForm.reset();
+            dueDateField.value = new Date().toISOString().substring(0, 10);new Date().toISOString().substring(0, 10);
         });
 
         closeButton.addEventListener("click", () => {
@@ -86,14 +91,23 @@ export default class UI {
             modal.close();
         })
     }
-    static updateTaskModal() {
+    static updateTaskModal(taskId) {
         const closeButton = document.getElementById("close-update-task-button");
         const createButton = document.getElementById("update-task-button");
         const createTaskForm = document.getElementById("update-task");
         const modal = document.getElementById("update-task-modal");
+        const titleField = document.getElementById("update-task-title");
+        const descriptionField = document.getElementById("update-task-description");
+        const dueDateField = document.getElementById("update-task-due-date");
+        const priorityField = document.getElementById("update-task-priority");
+        const currentTask = this.currentProject.items.find(task => task.id === taskId);
 
         modal.showModal();
         createTaskForm.reset();
+        titleField.value = currentTask.title;
+        descriptionField.value = currentTask.description;
+        dueDateField.value = currentTask.dueDate;
+        priorityField.value = currentTask.priority;
 
         closeButton.addEventListener("click", () => {
             modal.close();
@@ -148,7 +162,7 @@ export default class UI {
             editButton.addEventListener("click", (event) => {
                 let taskId = event.target.parentNode.parentNode.parentNode.parentNode.id;
                 currentUpdateTask(taskId);
-                this.updateTaskModal();
+                this.updateTaskModal(taskId);
             })
             infoArea.appendChild(editButton);
             titleArea.appendChild(infoArea);
