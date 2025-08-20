@@ -13,8 +13,12 @@ export default class UI {
     static getCurrentProject() {
         const projects = document.getElementsByClassName("project");
         Array.from(projects).forEach(project => {
-            project.addEventListener("click", () => {
+            project.addEventListener("click", (event) => {
                 setCurrentProject(project);
+                Array.from(projects).forEach(p => {
+                    p.style.border = "solid grey 3px";
+                })
+                project.style.border = "solid lightgreen 5px"
             })
         });
     }
