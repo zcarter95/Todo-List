@@ -1,5 +1,5 @@
 import { ta } from "date-fns/locale";
-import { addToDoItemToProject, addToDoProjectToList,  setCurrentProject} from "..";
+import { addToDoItemToProject, addToDoProjectToList,  setCurrentProject, currentUpdateTask, updateTask} from "..";
 import { format, parseISO } from "date-fns";
 import editImage from "../images/edit_icon.svg"
 export default class UI {
@@ -29,8 +29,8 @@ export default class UI {
             addToDoProjectToList(project);
         })
     }
-    static getNewTaskData() {
-        const submit = document.getElementById("new-task");
+    static getTaskData(id) {
+        const submit = document.getElementById(id);
         submit.addEventListener("submit", (event) => {
             event.preventDefault();
             let formData = new FormData(submit);
@@ -38,9 +38,15 @@ export default class UI {
                 title: Object.fromEntries(formData).title,
                 description: Object.fromEntries(formData).description,
                 dueDate: Object.fromEntries(formData).dueDate,
-                priority: Object.fromEntries(formData).priority
+                priority: Object.fromEntries(formData).priority,
             }
-            addToDoItemToProject(item);
+            switch(id) {
+                case("new-task"):
+                    addToDoItemToProject(item);
+                    break;
+                case("update-task"):
+                    updateTask(item);
+            }
         });
     }
     static createProjectModal() {
@@ -72,6 +78,22 @@ export default class UI {
             modal.showModal();
             createTaskForm.reset();
         });
+
+        closeButton.addEventListener("click", () => {
+            modal.close();
+        });
+        createButton.addEventListener("click", () => {
+            modal.close();
+        })
+    }
+    static updateTaskModal() {
+        const closeButton = document.getElementById("close-update-task-button");
+        const createButton = document.getElementById("update-task-button");
+        const createTaskForm = document.getElementById("update-task");
+        const modal = document.getElementById("update-task-modal");
+
+        modal.showModal();
+        createTaskForm.reset();
 
         closeButton.addEventListener("click", () => {
             modal.close();
@@ -123,8 +145,10 @@ export default class UI {
             let editIcon = document.createElement("img");
             editIcon.src = editImage;
             editButton.appendChild(editIcon);
-            editButton.addEventListener("click", () => {
-                updateTaskModal();
+            editButton.addEventListener("click", (event) => {
+                let taskId = event.target.parentNode.parentNode.parentNode.parentNode.id;
+                currentUpdateTask(taskId);
+                this.updateTaskModal();
             })
             infoArea.appendChild(editButton);
             titleArea.appendChild(infoArea);
@@ -158,19 +182,3 @@ export default class UI {
     }
 }
 
-function updateTaskModal() {
-    const closeButton = document.getElementById("close-update-task-button");
-    const createButton = document.getElementById("update-task-button");
-    const createTaskForm = document.getElementById("update-task");
-    const modal = document.getElementById("update-task-modal");
-
-    modal.showModal();
-    createTaskForm.reset();
-
-    closeButton.addEventListener("click", () => {
-        modal.close();
-    });
-    createButton.addEventListener("click", () => {
-        modal.close();
-    })
-}

@@ -8,6 +8,7 @@ const toDoList = new ToDoList();
 const defaultProject = new ToDoProject("Default");
 toDoList.addProject(defaultProject);
 let currentProject = defaultProject;
+let currentTaskId = ""
 
 document.addEventListener('DOMContentLoaded', ready);
 function ready() {
@@ -15,7 +16,8 @@ function ready() {
     UI.createTaskModal();
     UI.displayProjects(defaultProject);
     UI.getNewProjectData();
-    UI.getNewTaskData();
+    UI.getTaskData("new-task");
+    UI.getTaskData("update-task");
     UI.displayCurrentProject(currentProject);
     UI.getCurrentProject();
 }
@@ -23,6 +25,15 @@ function ready() {
 export function addToDoItemToProject(item) {
     let task = new ToDoItem(item.title, item.description, item.dueDate, item.priority);
     currentProject.addItem(task);
+    UI.displayTasks(currentProject);
+}
+
+export function updateTask(item) {
+    let currentTask = currentProject.items.find(task => task.id === currentTaskId);
+    currentTask.title = item.title;
+    currentTask.description = item.description;
+    currentTask.dueDate = item.dueDate;
+    currentTask.priority = item.priority;
     UI.displayTasks(currentProject);
 }
 
@@ -39,4 +50,8 @@ export function setCurrentProject(project) {
     currentProject = selectedProject;
     UI.displayCurrentProject(currentProject);
     UI.displayTasks(currentProject);
+}
+
+export function currentUpdateTask(taskId) {
+    currentTaskId = taskId
 }
